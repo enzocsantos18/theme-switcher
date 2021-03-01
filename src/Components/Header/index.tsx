@@ -1,21 +1,17 @@
 import React from 'react';
 import { ThemeContext } from '../../Providers/ThemeProvider';
 
-type Theme = {
-  background: String,
-  color: String,
-  primary: String,
-}
 
 const Header: React.FC = () => {
 
-  const {background, color, primary} = React.useContext(ThemeContext);
+  const {handleThemeSwitch, themeInfo} = React.useContext(ThemeContext);
+  const {primary} = themeInfo;
 
-  console.log(background)
 
   return (
-    <header style={{background, color}}>
+    <header>
       <h1 style={{color: primary}}>teste</h1>
+      <button onClick={() => handleThemeSwitch()}>Trocar cor</button>
     </header>
   )
 }
