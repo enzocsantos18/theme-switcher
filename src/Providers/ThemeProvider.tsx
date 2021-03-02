@@ -24,19 +24,24 @@ const ThemeProvider: React.FC = ({ children }) => {
 
 
   useEffect(() => {
+    const infos = JSON.parse(localStorage.getItem('theme') as string);
 
+    if(infos){
+      setTheme(infos.theme)
+      setThemeInfo(infos.themeInfo)
+    }
   }, [])
+
+  useEffect(() => {
+    localStorage.setItem('theme', JSON.stringify({theme, themeInfo}))
+  }, [theme, themeInfo])
+
 
 
   function handleThemeSwitch(){
-    if(theme){
-      setTheme(!theme);
-      setThemeInfo(dark);
-    }
-    else{
-      setTheme(!theme);
-      setThemeInfo(white); 
-    }
+    theme  ? setThemeInfo(dark) :  setThemeInfo(white); 
+    setTheme(!theme);
+
   }
 
   return (
